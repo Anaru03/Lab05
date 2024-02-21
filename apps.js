@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     const spaceofmessages = document.getElementById('messages-container');
     const SendMessage = document.getElementById('button-send');
     const ChangeColor = document.getElementById('button-toggle-theme');
-    const messageForm = document.getElementById('message-form');
+    
 
     const LIghtMode = {
         body: '#F8F8F8',
@@ -62,17 +62,17 @@ document.addEventListener('DOMContentLoaded', async function () {
     SendMessage.addEventListener('click', async (e) => {
         e.preventDefault(); 
         const username = prompt('Ingresa tu nombre:');
-        if (username === null || username.trim() === '') {
+        const message = prompt('Escribe tu mensaje...:'); 
+        if (username === null || username.trim() === '' || message === null || message.trim() === '') {
             return;
         }
         try {
-            await sendMessage(username);
-            MessageNew(username, new Date().toLocaleString());
+            await sendMessage(username, message);
+            MessageNew(username, message, new Date().toLocaleString());
         } catch (error) {
-            console.error('Error:', error);
+            console.error('Error para mandar el mensaje:', error);
         }
     });
-    
     
 
     try {
@@ -100,7 +100,7 @@ async function loadMessages() {
     return response.json();
 }
 
-async function sendMessage(username, ) {
+async function sendMessage(username, message) {
     const url = 'https://chat.arpanetos.lol/messages';
     const options = {
         method: 'POST',
@@ -109,7 +109,7 @@ async function sendMessage(username, ) {
         },
         body: JSON.stringify({
             username: username,
-            
+            message: message
         })
     };
     const response = await fetch(url, options);

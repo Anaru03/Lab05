@@ -173,7 +173,6 @@
   SendMessage.addEventListener('click', (e) => {
     e.preventDefault(); 
     const message = EnterMessage.value.trim();
-    const username = prompt('Ingresa tu nombre:');
     if (Valid_Message(message)) {
       MessageNew(username, message, new Date().toLocaleString());
       EnterMessage.value = ''; 
@@ -218,7 +217,7 @@
     e.preventDefault(); 
     const message = EnterMessage.value.trim();
     if (message !== '') {
-      MessageNew('Usuario', message, new Date().toLocaleString());
+      MessageNew(username, message, new Date().toLocaleString());
       EnterMessage.value = '';
     }
   });
