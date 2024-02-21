@@ -192,6 +192,27 @@
     spaceofmessages.style.color = colors.text;
   }
 
+  function toggleTheme() {
+    DarkM = !DarkM;
+    const ColorMode = DarkM ? DArkMode : LIghtMode;
+    applyTheme(ColorMode);
+    ChangeColor.innerText = DarkM ? '🕶️' : '👓';
+    localStorage.setItem('darkMode', DarkM);
+  }
+
+
+  function MessageNew(username, message, date) {
+    const messageContainer = document.createElement('div');
+    messageContainer.classList.add('space_message');
+    messageContainer.innerHTML = `
+      <p style="font-weight: bold; font-size: 1.2em; margin: 0;">${username}</p>
+      <p style="margin: 0;">${message}</p>
+      <p style="font-size: 0.8em; margin: 0;">${date}</p>
+    `;
+    spaceofmessages.appendChild(messageContainer);
+  }
+
+  
 </script>
 
 </body>

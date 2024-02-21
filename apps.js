@@ -68,3 +68,47 @@ document.addEventListener('DOMContentLoaded', async function () {
         console.error('Error loading messages:', error);
     }
 });
+
+async function loadMessages() {
+    const url = 'https://chat.arpanetos.lol/messages';
+    const options = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
+    const response = await fetch(url, options);
+    if (!response.ok) {
+        throw new Error('ERROR');
+    }
+    return response.json();
+}
+
+async function sendMessage(username, message) {
+    const url = 'https://chat.arpanetos.lol/messages';
+    const options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            username: username,
+            message: message
+        })
+    };
+    const response = await fetch(url, options);
+    if (!response.ok) {
+        throw new Error('ERROR');
+    }
+}
+
+function MessageNew(username, message, date) {
+    const messageContainer = document.createElement('div');
+    messageContainer.classList.add('message-container');
+    messageContainer.innerHTML = `
+      <p style="font-weight: bold; font-size: 1.2em; margin: 0;">${username}</p>
+      <p style="margin: 0;">${message}</p>
+      <p style="font-size: 0.8em; margin: 0;">${date}</p>
+    `;
+    spaceofmessages.appendChild(messageContainer);
+}
