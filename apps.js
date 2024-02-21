@@ -43,4 +43,28 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     ChangeColor.addEventListener('click', toggleTheme);
 
-})
+    SendMessage.addEventListener('click', async (e) => {
+        e.preventDefault(); 
+        const username = prompt('Please enter your name:');
+        const message = prompt('Type your message:'); 
+        if (username === null || username.trim() === '' || message === null || message.trim() === '') {
+            return;
+        }
+        try {
+            await sendMessage(username, message);
+            MessageNew(username, message, new Date().toLocaleString());
+        } catch (error) {
+            console.error('Error sending message:', error);
+        }
+    });
+    
+
+    try {
+        const messages = await loadMessages();
+        messages.forEach(message => {
+            MessageNew(message.username, message.message, message.created_at);
+        });
+    } catch (error) {
+        console.error('Error loading messages:', error);
+    }
+});

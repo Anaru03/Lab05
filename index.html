@@ -167,6 +167,30 @@
   const SendMessage = document.getElementById('button-send');
   const ChangeColor = document.getElementById('button-toggle-theme');
 
+  function Valid_Message(message) {
+    return message.length <= 140;
+  }
+
+  SendMessage.addEventListener('click', (e) => {
+    e.preventDefault(); 
+    const message = EnterMessage.value.trim();
+    if (Valid_Message(message)) {
+      MessageNew('Usuario', message, new Date().toLocaleString());
+      EnterMessage.value = ''; 
+    } else {
+      alert('El mensaje llega al limite de 140 caracteres');
+    }
+  });
+
+  function applyTheme(colors) {
+    body.style.backgroundColor = colors.body;
+    header.style.backgroundColor = colors.header;
+    main.style.backgroundColor = colors.main;
+    footer.style.backgroundColor = colors.footer;
+    EnterMessage.style.backgroundColor = colors.main;
+    spaceofmessages.style.borderColor = colors.border;
+    spaceofmessages.style.color = colors.text;
+  }
 
 </script>
 
