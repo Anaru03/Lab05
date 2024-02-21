@@ -47,7 +47,7 @@
   }
 
   footer {
-    height: 10%;
+    height: 25%;
     width: 100%;
     text-align: center;
     display: flex;
@@ -133,8 +133,7 @@
   </form>
 </main>
 
-<footer>
-</footer>
+<footer id="footer-content"></footer>
 
 <script>
   const LIghtMode = {
@@ -212,7 +211,20 @@
     spaceofmessages.appendChild(messageContainer);
   }
 
-  
+  ChangeColor.addEventListener('click', toggleTheme);
+
+  SendMessage.addEventListener('click', (e) => {
+    e.preventDefault(); 
+    const message = EnterMessage.value.trim();
+    if (message !== '') {
+      MessageNew('Usuario', message, new Date().toLocaleString());
+      EnterMessage.value = '';
+    }
+  });
+
+  const initialTheme = DarkM ? DArkMode : LIghtMode;
+  applyTheme(initialTheme);
+  ChangeColor.innerText = DarkM ? '🕶️' : '👓';
 </script>
 
 </body>

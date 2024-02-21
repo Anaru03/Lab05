@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     const header = document.querySelector('header');
     const main = document.querySelector('main');
     const footer = document.querySelector('footer');
+    const ends = document.querySelector('footer');
     const spaceofmessages = document.getElementById('messages-container');
     const SendMessage = document.getElementById('button-send');
     const ChangeColor = document.getElementById('button-toggle-theme');
@@ -26,6 +27,20 @@ document.addEventListener('DOMContentLoaded', async function () {
         border: '#192934',
         text: '#D5D8DA'
       };
+
+      try {
+        const messages = await loadMessages();
+        messages.forEach(message => {
+            MessageNew(message.username, message.message, message.created_at);
+        });
+
+        ends.innerText = 'Made by Ruth de León'; 
+        const footerContentElement = document.getElementById('footer-content');
+        footerContentElement.innerText = ends.innerText;
+
+    } catch (error) {
+        console.error('Error loading messages:', error);
+    }
 
     function applyTheme(colors) {
         for (let key in colors) {
@@ -54,7 +69,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             await sendMessage(username, message);
             MessageNew(username, message, new Date().toLocaleString());
         } catch (error) {
-            console.error('Error sending message:', error);
+            console.error('Error para mandar el mensaje:', error);
         }
     });
     
@@ -111,4 +126,5 @@ function MessageNew(username, message, date) {
       <p style="font-size: 0.8em; margin: 0;">${date}</p>
     `;
     spaceofmessages.appendChild(messageContainer);
+    
 }
