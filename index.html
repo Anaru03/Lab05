@@ -76,8 +76,8 @@
     padding: 5px;
     border-radius: 5px;
     background-color: #2c024b; 
-    border: 1px solid #eff3f5; 
-    color: #fff;
+    border: 1px solid #eff3f5;
+    color: #fff; 
   }
 
   #write-container {
@@ -119,7 +119,56 @@
 </style>
 </head>
 <body>
- 
+
+<header>
+  <h1>Arpanetos Chat</h1>
+  <button id="button-toggle-theme">👓</button>
+</header>
+
+<main>
+  <div id="messages-container"></div>
+  <form id="write-container">
+    <input type="text" id="input-message" placeholder="Escribe tu mensaje...">
+    <input type="submit" id="button-send" value="Send">
+  </form>
+</main>
+
+<footer>
+</footer>
+
+<script>
+  const LIghtMode = {
+    body: '#F8F8F8',
+    header: '#2c024b',
+    main: '#F6F6F6',
+    footer: '#F6F6F6',
+    message: '#2c024b',
+    border: '#EDF0F1',
+    text: '#4F4F4F'
+  };
+
+  const DArkMode = {
+    body: '#242F38',
+    header: '#52a5e0',
+    main: '#141F27',
+    footer: '#141F27',
+    message: '#52a5e0',
+    border: '#192934',
+    text: '#D5D8DA'
+  };
+
+  let DarkM = localStorage.getItem('darkMode') === 'true';
+  const body = document.body;
+  const header = document.querySelector('header');
+  const main = document.querySelector('main');
+  const footer = document.querySelector('footer');
+  const spaceofmessages = document.getElementById('messages-container');
+  const EnterMessage = document.getElementById('input-message');
+  const SendMessage = document.getElementById('button-send');
+  const ChangeColor = document.getElementById('button-toggle-theme');
+
+
+</script>
 
 </body>
 </html>
